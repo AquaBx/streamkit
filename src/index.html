@@ -1,0 +1,71 @@
+<link href="style.css" rel="stylesheet">
+<script src="script.js"></script>
+
+<body onload="transform('content', 0);change('canvas','inpimg')" >
+	<div id="topbar">
+		<div class="menu">
+			<button onclick="transform('content', 0)">Home</button>
+			<button onclick="transform('content', 1)">Banner</button></div>
+		<div class="button"><button onclick="remote.getCurrentWindow().minimize()"><span class="material-icons">horizontal_rule</span></button><button onclick="remote.getCurrentWindow().close()"><span class="material-icons">close</span></button></div>
+		<p>Streamkit by AquaBx</p>
+	</div>
+
+	<div class="content">
+			<p>Welcome and thanks you to use our utility <a style="color:red">❤</a>.</p>
+			<p>You can help us by donate a little gift <a href="javascript:shell.openExternal('https://streamlabs.com/aquabx/tip')">here <i class="network"></i></a>.</p>
+			<p>And you can suggest feature <a href="javascript:shell.openExternal('mailto:tom.chauvel@hotmail.com')">here</a>.</p>
+			
+	</div>
+	<div class="content">
+		<div class="flex">
+			<div class="flexed">
+				<h3>Color : </h3>
+				<input onchange="change('canvas','inpimg')" name="color" value="#ffffff" type="color" id="color" >
+				<h3>Text : </h3>
+				<div class="flex">
+					<input class="flexed" onchange="change('canvas','inpimg')" title="Font" value="Comfortaa" id="font">
+					<input class="flexed" onchange="change('canvas','inpimg')" title="Font Size (px)" type="number" value="48" id="fontsize">			
+				</div>	
+				<div class="flex">
+					<input class="flexed" title="Position X (%)" onchange="change('canvas','inpimg')" value="75" min="0" max="100" type="number" id="x-text">
+					<input class="flexed" title="Position Y (%)" onchange="change('canvas','inpimg')" value="55" min="0" max="100" type="number" id="y-text">
+				</div>
+				<input onchange="change('canvas','inpimg')" value="My Text" id="text">
+				<h3>Social network : </h3>
+				<div class="flex">
+					<input class="flexed" title="Position X (%)" value="5" min="0" max="100" type="number" id="x-logo">
+					<input class="flexed" title="Position Y (%)" value="50" min="0" max="100" type="number" id="y-logo">
+				</div>
+				<select onchange="change('canvas','inpimg')" id="social">
+					<option value="Instagram">Instagram</option>
+					<option value="Discord">Discord</option>
+					<option value="Twitter">Twitter</option>
+					<option value="Facebook">Facebook</option>
+					<option value="Youtube">Youtube</option>
+					<option value="TikTok">TikTok</option>
+					<option value="Snapchat">Snapchat</option>
+					<option value="Linkedin">Linkedin</option>
+					<option value="Twitch">Twitch</option>
+					<option value="Github">Github</option>
+					<option value="Pinterest">Pinterest</option>
+					<option value="Reddit">Reddit</option>
+					<option value="WhatsApp">WhatsApp</option>
+					<option value="Paypal">Paypal</option>
+				</select>
+			</div>
+			<div class="flexed">
+				<h3>Background Image : </h3>
+				<input onchange="change('canvas','inpimg')" type="file" id="inpimg">
+				<input onchange="change('canvas','inpimg')" title="Alignement (%)" value="0" min="0" max="100" type="number" id="y">
+				<h3>Size : </h3>
+				<div class="flex">
+					<input class="flexed" title="Width (px)" onchange="change('canvas','inpimg')" value="395" min="0" type="number" id="width">
+					<input class="flexed" title="Height (px)" onchange="change('canvas','inpimg')" value="130" min="0" type="number" id="height">
+				</div>
+				<h3>Output</h3>
+				<a class="btn" download onclick="this.href=save('canvas')"><canvas id="canvas"  width="395" height="130"></canvas></a>
+				<p>Click on the picture to save</p>
+			</div>
+		</div>
+	</div>
+</body>

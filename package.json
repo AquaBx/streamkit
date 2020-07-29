@@ -1,0 +1,16 @@
+{
+  "name": "StreamKit",
+  "version": "1.0.0",
+  "description": "Make Stream Great Again",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "AquaBx",
+  "devDependencies": {
+    "electron": "^9.1.1",
+    "electron-builder": "^22.8.0"
+  }
+}
