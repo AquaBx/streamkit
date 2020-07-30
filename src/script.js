@@ -2,15 +2,48 @@ const { remote } = require('electron')
 var obj = require('./networks.json');
 const { shell } = require('electron')
 
+function chk_upd(url){
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onload = function() {
+		if (xhr.response["version"] ==  remote.app.getVersion()){
+			console.log("up to date")
+		}
+		else {
+			var upd = confirm("A new Update is available : " + xhr.response["version"]);
+			if (upd == true) {
+			  upd = shell.openPath("https://github.com/AquaBx/streamkit/releases/latest/download/" + process.platform + "-" + process.arch + ".zip");
+			}
+		}
+	};
+	xhr.send();
+}
+
+var url = chk_upd("https://github.com/AquaBx/streamkit/releases/latest/download/version.json")
+
 
 function percent(x,wc,w){
 	return x*(wc-w)/100+w/2
 }
 
-function change(id,id2){
+function maxchk(id){
+	var doc = document.getElementById(id)
+	if (parseInt(doc.value) >= parseInt(doc.max)){
+		doc.value = doc.max
+	}
+	else if (parseInt(doc.value) <= parseInt(doc.min)){
+		doc.value = doc.min
+	}
+	return document.getElementById(id).value
+}
 
-	document.getElementById(id).width = document.getElementById("width").value
-	document.getElementById(id).height = document.getElementById("height").value
+function change(id,id2){
+	var width = maxchk("width")
+	var height = maxchk("height")
+
+	document.getElementById(id).width = maxchk("width")
+	document.getElementById(id).height = maxchk("height")
 
 	var ctx = document.getElementById(id).getContext('2d')
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -24,13 +57,13 @@ function change(id,id2){
 	var text = document.getElementById("text").value
 
 	ctx.font = '100px "Networks"'
-	var xlogo = percent(parseInt(document.getElementById("x-logo").value), document.getElementById("width").value, ctx.measureText(social).width)
-	var ylogo = percent(parseInt(document.getElementById("y-logo").value), document.getElementById("height").value, ctx.measureText(social).width)
-	ctx.fillText(social, parseInt(xlogo), parseInt(ylogo))
+	var xlogo = percent(maxchk("x-logo"), maxchk("width"), ctx.measureText(social).width)
+	var ylogo = percent(maxchk("y-logo"), maxchk("height"), ctx.measureText(social).width)
+	ctx.fillText(social, xlogo, ylogo)
 
 	ctx.font = document.getElementById("fontsize").value/16 + 'em"' + document.getElementById("font").value + '"';
-	var xtext = percent(parseInt(document.getElementById("x-text").value), document.getElementById("width").value, ctx.measureText(text).width)
-	var ytext = percent(parseInt(document.getElementById("y-text").value), document.getElementById("height").value, document.getElementById("fontsize").value)
+	var xtext = percent(maxchk("x-text"), maxchk("width"), ctx.measureText(text).width)
+	var ytext = percent(maxchk("y-text"), maxchk("height"), document.getElementById("fontsize").value)
 	ctx.fillText(text, xtext, ytext);
 
 	var fichier = document.getElementById(id2).files
@@ -39,11 +72,12 @@ function change(id,id2){
 		ctx.globalCompositeOperation='destination-over'
 		var img = new Image;
 		img.onload = function() {
-			var width = 395
-			var height = width*this.height/this.width
-			var x = 0
-			var y =  - document.getElementById("y").value*(height-130)/100
-			ctx.drawImage(img, x, y, width, height)
+			var nwidth = width
+			var nheight = this.height*width/this.width
+			var nx = 0
+			var ny = - maxchk("y")*(nheight-height)/100
+
+			ctx.drawImage(img, nx, ny, nwidth, nheight)
 		}
 		img.src = URL.createObjectURL(fichier)
 	}
