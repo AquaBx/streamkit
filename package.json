@@ -6,11 +6,11 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder -w zip nsis --x64 --arm64 ",
-"help": "electron-builder help"
+    "help": "electron-builder help"
   },
   "author": "AquaBx",
   "devDependencies": {
-    "electron": "~22.0.0",  
-    "electron-builder": "^23.6.0"
+    "electron": "latest",
+    "electron-builder": "^22.10.3"
   }
 }
