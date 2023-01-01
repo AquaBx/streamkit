@@ -5,12 +5,12 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder -w zip nsis & echo {\"version\":\"1.0.0\"} > dist/version.json",
-    "lol": "DIR | Rename-Item -NewName {'win32-x64' + $_.Extension}"
+    "dist": "electron-builder -w zip nsis --x64 --arm64 ",
+"help": "electron-builder help"
   },
   "author": "AquaBx",
   "devDependencies": {
-    "electron": "^11.5.0",
-    "electron-builder": "^22.8.0"
+    "electron": "~22.0.0",  
+    "electron-builder": "^23.6.0"
   }
 }

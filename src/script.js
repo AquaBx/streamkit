@@ -1,27 +1,6 @@
-const { remote } = require('electron')
-var obj = require('./networks.json');
-const { shell } = require('electron')
+const {remote,shell} = require("electron")
 
-function chk_upd(url){
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', url, true);
-	xhr.responseType = 'json';
-	xhr.onload = function() {
-		if (xhr.response["version"] ==  remote.app.getVersion()){
-			console.log("up to date")
-		}
-		else {
-			var upd = confirm("A new Update is available : " + xhr.response["version"]);
-			if (upd == true) {
-			  upd = shell.openPath("https://github.com/AquaBx/streamkit/releases/latest/download/" + process.platform + "-" + process.arch + ".zip");
-			}
-		}
-	};
-	xhr.send();
-}
-
-var url = chk_upd("https://github.com/AquaBx/streamkit/releases/latest/download/version.json")
-
+var elec_window = remote.getCurrentWindow()
 
 function percent(x,wc,w){
 	return x*(wc-w)/100+w/2
