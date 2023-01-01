@@ -2,11 +2,6 @@ name: website
 
 on: push
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   publish:
     runs-on: windows-latest
@@ -20,9 +15,6 @@ jobs:
       -
         name: Build App
         run: npm run dist
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
         
       - name: Upload Build
         uses: actions/upload-artifact@v3.1.1
