@@ -24,11 +24,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2
         
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload Build
+        uses: actions/upload-artifact@v3.1.1
         with:
-          path: './dist'
-          
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          name: WinBuild
+          path: ./dist
