@@ -3,7 +3,7 @@ name: website
 on: push
 
 jobs:
-  publish:
+  build:
     runs-on: windows-latest
     steps:
       -
